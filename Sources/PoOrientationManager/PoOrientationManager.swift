@@ -1,12 +1,6 @@
-//
-//  PoOrientationManager.swift
-//  PoOrientationManager
-//
-//  Created by zhongshan on 2024/1/5.
-//
-
 import UIKit
 
+@MainActor
 public final class PoOrientationManager {
     public static let shared = PoOrientationManager()
     private init() {

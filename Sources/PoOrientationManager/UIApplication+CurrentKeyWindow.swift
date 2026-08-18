@@ -1,10 +1,3 @@
-//
-//  UIApplication+CurrentKeyWindow.swift
-//  PoOrientationManager
-//
-//  Created by HzS on 2024/1/11.
-//
-
 import UIKit
 
 extension UIApplication {

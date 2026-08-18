@@ -1,14 +1,8 @@
-//
-//  UIViewController+Orientation.swift
-//  PoOrientationManager
-//
-//  Created by zhongshan on 2024/1/5.
-//
-
 import UIKit
 
 extension UIViewController {
     
+    @MainActor
     private enum AssociatedKeys {
         static var isActive: UInt8 = 0
         static var supportedInterfaceOrientations: UInt8 = 0
