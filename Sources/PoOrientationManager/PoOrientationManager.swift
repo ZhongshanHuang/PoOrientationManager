@@ -5,14 +5,16 @@ public final class PoOrientationManager {
     public static let shared = PoOrientationManager()
     private init() {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [weak self] notification in
-            guard let self else { return }
-            if UIApplication.shared.applicationState != .active { return }
-            
-            let deviceOrientation = UIDevice.current.orientation
-            if deviceOrientation == .portrait || deviceOrientation.isLandscape {
-                if let currentController =  UIViewController.poCurrentViewController, currentController.poCurrentOrientation != deviceOrientation.toInterfaceOrientation {
-                    set(deviceOrientation.toInterfaceOrientation, to: currentController)
+        NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] notification in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                if UIApplication.shared.applicationState != .active { return }
+                
+                let deviceOrientation = UIDevice.current.orientation
+                if deviceOrientation == .portrait || deviceOrientation.isLandscape {
+                    if let currentController =  UIViewController.poCurrentViewController, currentController.poCurrentOrientation != deviceOrientation.toInterfaceOrientation {
+                        self.set(deviceOrientation.toInterfaceOrientation, to: currentController)
+                    }
                 }
             }
         }
